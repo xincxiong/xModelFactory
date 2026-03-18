@@ -11,7 +11,7 @@ compatibility layers.
 """
 
 __version__ = "1.0.0"
-__author__ = "xModelFactory Team"
+__author__ = "xiong xin"
 
 from .configs import (
     ModelConfig,

@@ -318,10 +318,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you use xModelFactory in your research, please cite:
 
 ```bibtex
-@software{xmodelfactory2024,
+@software{xmodelfactory2026,
   title={xModelFactory: A Comprehensive Training Framework for LLM and VLM},
-  author={xModelFactory Team},
-  year={2024},
+  author={xiong xin},
+  year={2026},
   url={https://github.com/yourusername/xModelFactory}
 }
 ```

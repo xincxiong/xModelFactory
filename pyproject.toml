@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "xModelFactory Team", email = "team@xmodelfactory.ai"},
+    {name = "xiong xin", email = "xiongxinland@gmail.com"},
 ]
 keywords = ["llm", "vlm", "training", "deepspeed", "distributed", "pytorch"]
 classifiers = [
