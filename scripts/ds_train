@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+"""
+DeepSpeed training launcher.
+
+Usage:
+    ds_train train.py [args...]
+"""
+
+import os
+import sys
+import subprocess
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: ds_train <train_script.py> [args...]")
+        sys.exit(1)
+
+    run_file = sys.argv[1]
+    extra_args = sys.argv[2:]
+
+    os.environ['PARALLEL_TYPE'] = 'ds'
+
+    cmd = ['deepspeed', run_file] + extra_args
+    print(f"[ds_train] Running: {' '.join(cmd)}")
+
+    result = subprocess.run(cmd)
+    sys.exit(result.returncode)
+
+
+if __name__ == '__main__':
+    main()

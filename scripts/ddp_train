@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""
+DDP (Distributed Data Parallel) training launcher.
+
+Usage:
+    ddp_train train.py [args...]
+"""
+
+import os
+import sys
+import subprocess
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: ddp_train <train_script.py> [args...]")
+        sys.exit(1)
+
+    run_file = sys.argv[1]
+    extra_args = sys.argv[2:]
+
+    # Detect GPU count
+    try:
+        import torch
+        gpu_count = torch.cuda.device_count()
+    except ImportError:
+        gpu_count = 1
+
+    os.environ['PARALLEL_TYPE'] = 'ddp'
+
+    cmd = [
+        'torchrun',
+        '--standalone',
+        '--nproc_per_node', str(gpu_count),
+        run_file
+    ] + extra_args
+
+    print(f"[ddp_train] Running: {' '.join(cmd)}")
+
+    result = subprocess.run(cmd)
+    sys.exit(result.returncode)
+
+
+if __name__ == '__main__':
+    main()

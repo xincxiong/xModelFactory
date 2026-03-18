@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""
+Smart training launcher - automatically selects best parallel strategy.
+
+Usage:
+    smart_train train.py [args...]
+    smart_train --help
+"""
+
+import os
+import sys
+import subprocess
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: smart_train <train_script.py> [args...]")
+        sys.exit(1)
+
+    run_file = sys.argv[1]
+    extra_args = sys.argv[2:]
+
+    # Detect available backends
+    try:
+        import deepspeed
+        has_deepspeed = True
+    except ImportError:
+        has_deepspeed = False
+
+    try:
+        import torch
+        gpu_count = torch.cuda.device_count()
+    except ImportError:
+        gpu_count = 0
+
+    # Determine parallel type
+    if has_deepspeed:
+        parallel_type = 'ds'
+        print(f"[smart_train] Using DeepSpeed (detected {gpu_count} GPUs)")
+    elif gpu_count > 1:
+        parallel_type = 'ddp'
+        print(f"[smart_train] Using DDP with {gpu_count} GPUs")
+    else:
+        parallel_type = 'none'
+        print(f"[smart_train] Using single device training")
+
+    # Set environment variable
+    os.environ['PARALLEL_TYPE'] = parallel_type
+
+    # Build command
+    if parallel_type == 'ds':
+        cmd = ['deepspeed', run_file] + extra_args
+    elif parallel_type == 'ddp':
+        cmd = [
+            'torchrun',
+            '--standalone',
+            '--nproc_per_node', str(gpu_count),
+            run_file
+        ] + extra_args
+    else:
+        cmd = [sys.executable, run_file] + extra_args
+
+    print(f"[smart_train] Running: {' '.join(cmd)}")
+
+    # Execute
+    result = subprocess.run(cmd)
+    sys.exit(result.returncode)
+
+
+if __name__ == '__main__':
+    main()

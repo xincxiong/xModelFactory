@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xmodelfactory"
+dynamic = ["version"]
+description = "A comprehensive training framework for LLM and VLM"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "xModelFactory Team", email = "team@xmodelfactory.ai"},
+]
+keywords = ["llm", "vlm", "training", "deepspeed", "distributed", "pytorch"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0.0",
+    "numpy>=1.20.0",
+]
+
+[project.optional-dependencies]
+deepspeed = ["deepspeed>=0.12.0"]
+lion = ["lion-pytorch>=0.1.0"]
+dev = [
+    "pytest>=7.0",
+    "black>=22.0",
+    "flake8>=4.0",
+    "mypy>=0.950",
+]
+all = [
+    "deepspeed>=0.12.0",
+    "lion-pytorch>=0.1.0",
+]
+
+[project.scripts]
+smart_train = "scripts.smart_train:main"
+ds_train = "scripts.ds_train:main"
+ddp_train = "scripts.ddp_train:main"
+py_train = "scripts.py_train:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/xModelFactory"
+Documentation = "https://xmodelfactory.readthedocs.io"
+Repository = "https://github.com/yourusername/xModelFactory"
+Issues = "https://github.com/yourusername/xModelFactory/issues"
+
+[tool.setuptools_scm]
+write_to = "xmodel_factory/_version.py"
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
