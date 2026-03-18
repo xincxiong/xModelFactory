@@ -42,10 +42,8 @@ class TrainerTools:
         self.tokenizer = SimpleTokenizer()
 
         # Whether to use AMP (Automatic Mixed Precision)
-        self.use_amp = (
-            'cuda' in self.parallel.device and
-            not isinstance(self.parallel, DsParallel)
-        )
+        # Disable AMP for now due to CUDA initialization issues
+        self.use_amp = False
 
         print(f"[TrainerTools] World size: {self.parallel.world_size}, "
               f"Use AMP: {self.use_amp}, Device: {self.parallel.device}")

@@ -1,60 +1,12 @@
-"""
-Setup configuration for xModelFactory.
-"""
+"""Legacy setuptools configuration for xModelFactory."""
 
-from setuptools import setup, find_packages
-import os
+from pathlib import Path
 
-# Read version
+from setuptools import find_packages, setup
+
+ROOT = Path(__file__).parent
 version = "1.0.0"
-
-# Read long description
-long_description = """
-# xModelFactory
-
-A comprehensive training framework for Large Language Models (LLM) and Vision Language Models (VLM).
-
-## Features
-
-- **Multiple Training Stages**: Pre-training, SFT, DPO, PPO, GRPO
-- **Multi-GPU Support**: DeepSpeed, DDP, Single GPU
-- **Flexible Configuration**: Easy-to-use config system
-- **Production Ready**: Built for real-world deployment
-
-## Installation
-
-```bash
-pip install -e .
-```
-
-## Quick Start
-
-```python
-from xmodel_factory import ModelConfig, TrainConfig, Trainer
-
-# Create model config
-model_config = ModelConfig(
-    vocab_size=32000,
-    hidden_size=4096,
-    num_hidden_layers=32,
-)
-
-# Create training config
-train_config = TrainConfig(
-    n_epochs=3,
-    batch_size=4,
-    model_config=model_config,
-)
-
-# Train
-trainer = Trainer(train_config=train_config, eval_prompts=["Hello"])
-trainer.train()
-```
-
-## License
-
-MIT License
-"""
+long_description = (ROOT / "README.md").read_text(encoding="utf-8")
 
 setup(
     name='xmodelfactory',
@@ -82,10 +34,10 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'smart_train=scripts.smart_train:main',
-            'ds_train=scripts.ds_train:main',
-            'ddp_train=scripts.ddp_train:main',
-            'py_train=scripts.py_train:main',
+            'smart_train=xmodel_factory.cli.smart_train:main',
+            'ds_train=xmodel_factory.cli.ds_train:main',
+            'ddp_train=xmodel_factory.cli.ddp_train:main',
+            'py_train=xmodel_factory.cli.py_train:main',
         ],
     },
     classifiers=[

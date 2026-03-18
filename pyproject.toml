@@ -45,10 +45,10 @@ all = [
 ]
 
 [project.scripts]
-smart_train = "scripts.smart_train:main"
-ds_train = "scripts.ds_train:main"
-ddp_train = "scripts.ddp_train:main"
-py_train = "scripts.py_train:main"
+smart_train = "xmodel_factory.cli.smart_train:main"
+ds_train = "xmodel_factory.cli.ds_train:main"
+ddp_train = "xmodel_factory.cli.ddp_train:main"
+py_train = "xmodel_factory.cli.py_train:main"
 
 [project.urls]
 Homepage = "https://github.com/yourusername/xModelFactory"

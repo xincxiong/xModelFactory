@@ -1,10 +1,37 @@
-# xModelFactory
+<p align="center">
+  <img src="./xmodelfactory-logo.png" alt="xModelFactory logo" width="320" />
+</p>
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0+-red.svg)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<h1 align="center">xModelFactory</h1>
 
-A comprehensive, production-ready training framework for Large Language Models (LLM) and Vision Language Models (VLM).
+<p align="center">
+  A production-ready training framework for Large Language Models (LLM) and Vision Language Models (VLM).
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/downloads/">
+    <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python 3.8+" />
+  </a>
+  <a href="https://pytorch.org/">
+    <img src="https://img.shields.io/badge/pytorch-2.0+-red.svg" alt="PyTorch 2.0+" />
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#training-examples">Examples</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#testing">Testing</a>
+</p>
+
+<p align="center">
+  Modular training stages, multi-GPU execution, and production-friendly tooling for scalable model development.
+</p>
 
 ## Features
 
@@ -305,8 +332,3 @@ If you use xModelFactory in your research, please cite:
 - Distributed training powered by [DeepSpeed](https://www.deepspeed.ai/)
 - Inspired by [Hugging Face Transformers](https://huggingface.co/docs/transformers)
 
-## Support
-
-- GitHub Issues: [https://github.com/yourusername/xModelFactory/issues](https://github.com/yourusername/xModelFactory/issues)
-- Documentation: [https://xmodelfactory.readthedocs.io](https://xmodelfactory.readthedocs.io)
-- Email: team@xmodelfactory.ai

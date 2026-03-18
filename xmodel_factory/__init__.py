@@ -1,33 +1,21 @@
 """
-xModelFactory - A comprehensive training framework for Large Language Models (LLM) and Vision Language Models (VLM).
+xModelFactory public package exports.
 
-This package provides a complete training solution supporting:
-- Pre-training
-- Supervised Fine-tuning (SFT)
-- Direct Preference Optimization (DPO)
-- Proximal Policy Optimization (PPO)
-- Group Relative Policy Optimization (GRPO)
-- Multi-GPU distributed training (DeepSpeed, DDP)
+The package is organized into three higher-level namespaces:
+- `configs`: structured configuration objects
+- `models`: model implementations and attention utilities
+- `trainers`: training entry points for each stage
+
+Legacy modules such as `model_core` and `train_core` remain available as
+compatibility layers.
 """
 
 __version__ = "1.0.0"
 __author__ = "xModelFactory Team"
 
-from .model_core import (
+from .configs import (
     ModelConfig,
     VLMConfig,
-    LlmModel,
-    VlmModel,
-    KVCache,
-    attention_masks,
-)
-
-from .train_core import (
-    Trainer,
-    SFTTrainer,
-    DPOTrainer,
-    PPOTrainer,
-    GRPOTrainer,
     TrainConfig,
     OptimConfig,
     DsConfig,
@@ -35,6 +23,26 @@ from .train_core import (
     DPOConfig,
     PPOConfig,
     GRPOConfig,
+)
+
+from .models import (
+    LlmModel,
+    VlmModel,
+    KVCache,
+    prepare_decoder_attention_mask,
+    make_causal_mask,
+    expand_mask,
+)
+
+from .trainers import (
+    Trainer,
+    SFTTrainer,
+    DPOTrainer,
+    PPOTrainer,
+    GRPOTrainer,
+)
+
+from .train_core import (
     FileDataset,
     generate,
     streaming_generate,
@@ -47,7 +55,9 @@ __all__ = [
     "LlmModel",
     "VlmModel",
     "KVCache",
-    "attention_masks",
+    "prepare_decoder_attention_mask",
+    "make_causal_mask",
+    "expand_mask",
     # Train Core
     "Trainer",
     "SFTTrainer",

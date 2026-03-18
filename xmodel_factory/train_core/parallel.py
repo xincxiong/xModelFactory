@@ -62,12 +62,9 @@ class Parallel(ABC):
             print(f"[Parallel] Backend={self.dist_backend}, Rank={self._global_rank}, "
                   f"LocalRank={self._local_rank}, WorldSize={self.world_size}, Device={self.device}")
         else:
-            if torch.cuda.is_available():
-                self.device_type = 'cuda'
-                self.device = 'cuda:0'
-            else:
-                self.device_type = 'cpu'
-                self.device = 'cpu'
+            # Force CPU mode to avoid CUDA initialization issues
+            self.device_type = 'cpu'
+            self.device = 'cpu'
 
     @abstractmethod
     def process(

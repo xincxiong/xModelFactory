@@ -1,5 +1,8 @@
 """
-Train Core - Training framework for LLM/VLM models.
+Train Core - legacy training framework exports.
+
+This package remains import-compatible for existing code that uses
+`xmodel_factory.train_core.*`.
 """
 
 from .train_configs import (
